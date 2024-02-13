@@ -1,3 +1,11 @@
 ---
 batch_connect:
   template: "basic"
+script:
+  <%- unless auto_queues.blank? -%>
+  queue_name: <%= auto_queues %>
+  <%- end -%>
+  <%- unless bc_num_hours.blank? -%>
+  bc_num_hours: <%= bc_num_hours %>
+  <%- end -%>
+  email_on_started: true
