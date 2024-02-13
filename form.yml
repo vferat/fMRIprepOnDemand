@@ -15,7 +15,7 @@ form:
 # We do however, want cores to be a number_field and with some min & max values.
 attributes:
   skip_bids_validation:
-    widget: skip_bids_validation
+    widget: check_box
     checked_value: "--skip_bids_validation"
     unchecked_value: ""
     label: "skip_bids_validation"
