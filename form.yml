@@ -10,6 +10,7 @@ form:
   - auto_queues
   - bc_num_hours
   - bc_num_slots
+  - skip_bids_validation
 
 # By default, everything defined in 'form' above is a text_field. Let's leave account alone
 # We do however, want cores to be a number_field and with some min & max values.
@@ -19,7 +20,7 @@ attributes:
     checked_value: "--skip_bids_validation"
     unchecked_value: ""
     label: "skip_bids_validation"
-    required : false
+    required : true
     display: true
     help: |
       Assume the input dataset is BIDS compliant and skip the validation
