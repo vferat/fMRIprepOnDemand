@@ -10,17 +10,22 @@ form:
   - auto_queues
   - bc_num_hours
   - bc_num_slots
+  - bids_dir
   - skip_bids_validation
 
 # By default, everything defined in 'form' above is a text_field. Let's leave account alone
 # We do however, want cores to be a number_field and with some min & max values.
 attributes:
+  bids_dir:
+    type: string
+    default: ""
+    label: "bids_dir"
+    required: true
+    help: "The root folder of a BIDS valid dataset (sub-XXXXX folders should be found at the top level in this folder)."
   skip_bids_validation:
     widget: check_box
     checked_value: "--skip_bids_validation"
     unchecked_value: ""
     label: "skip_bids_validation"
-    required : true
-    display: true
     help: |
       Assume the input dataset is BIDS compliant and skip the validation
