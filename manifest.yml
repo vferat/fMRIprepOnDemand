@@ -1,0 +1,7 @@
+---
+name: fMRIprep
+category: Interactive Apps
+subcategory: neurosciences
+role: batch_connect
+description: fmriprep
+new_window: false
