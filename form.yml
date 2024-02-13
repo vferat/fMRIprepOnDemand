@@ -19,5 +19,7 @@ attributes:
     checked_value: "--skip_bids_validation"
     unchecked_value: ""
     label: "skip_bids_validation"
+    required : false
+    display: true
     help: |
       Assume the input dataset is BIDS compliant and skip the validation
