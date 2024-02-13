@@ -1,7 +1,7 @@
 ---
 
 # the cluster(s) this app can submit jobs to.
-cluster: "owens"
+cluster: "baobab"
 
 # 'form' is a list of form choices for this app. Here we're allowing users to set
 # the account and the number of cores they want to request for this job.
