@@ -1,0 +1,53 @@
+# form parameters
+## bids_dir
+<% bids_dir = File.expand_path(context.bids_dir) %>
+## output_dir
+<% output_dir = File.expand_path(context.output_dir) %>
+## analysis_level
+<% analysis_level = context.analysis_level %>
+## skip_bids_validation
+<% skip_bids_validation = context.skip_bids_validation %>
+## participant_label
+<% participant_label = context.participant_label %>
+<% if participant_label.present? %>
+  <% participants_list = participant_label.split(' ') %>
+  <% participants = participant_label %>
+<% else %>
+  <% participants_list = Dir.glob(bids_dir).map { |folder| folder[/sub-(.*)/, 1] } %>
+  <% participants = participants_list.join(' ') %>
+<% end %>
+
+
+echo """
+# Number of CPUs per task
+#SBATCH --cpus-per-task=8
+# Request memory
+#SBATCH --mem-per-cpu=4000
+# Walltime (job duration)
+#SBATCH --time=1-00:00:00 
+# Array jobs (* change the range according to # of subject; % = number of active job array tasks)
+#SBATCH --array=1-<% participants_list.length %>%<% participants_list.length %>
+
+participants=(<%= participants %>)
+PARTICIPANT_LABEL=${participants[(${SLURM_ARRAY_TASK_ID} - 1)]}
+
+BIDS_DIR=<%= bids_dir %>
+OUTPUT_DIR=<%= output_dir %>
+WORK_DIR=/home/users/f/ferat/scratch
+FMRIPREP_RESOURCES_PATH=/home/users/f/ferat/fmriprep-resources
+
+apptainer run \
+                --cleanenv \
+                --containall \
+                --bind ${FMRIPREP_RESOURCES_PATH}:/resources \
+                --bind ${BIDS_DIR}:/data \
+                --bind ${WORK_DIR}:/work \
+                --home ${OUTPUT_DIR}:/output \
+                --env TEMPLATEFLOW_HOME=/resources/templateflow \
+        ${FMRIPREP_RESOURCES_PATH}/fmriprep.sif /data /output \
+        participant --participant_label $PARTICIPANT_LABEL \
+        --nprocs 8 \
+        --mem 8000 \
+        -w /work \
+        --fs-license-file /resources/license.txt \
+""" > "run.sh"

@@ -10,7 +10,6 @@ form:
   - auto_queues
   - bids_dir
   - output_dir
-  - analysis_level
   - skip_bids_validation
   - participant_label
 
@@ -29,12 +28,6 @@ attributes:
     label: "output_dir"
     required: true
     help: "The output path for the outcomes of preprocessing and visual reports"
-  analysis_level:
-    type: "hidden_field"
-    default: "participant"
-    label: "analysis_level"
-    required: true
-    help: "Processing stage to be run, only “participant” in the case of fMRIPrep (see BIDS-Apps specification)."
   skip_bids_validation:
     widget: check_box
     checked_value: "--skip_bids_validation"
