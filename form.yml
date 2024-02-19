@@ -8,11 +8,11 @@ cluster: "baobab"
 form:
   - auto_accounts
   - auto_queues
-  - bc_num_hours
-  - bc_num_slots
   - bids_dir
   - output_dir
+  - analysis_level
   - skip_bids_validation
+  - participant_label
 
 # By default, everything defined in 'form' above is a text_field. Let's leave account alone
 # We do however, want cores to be a number_field and with some min & max values.
