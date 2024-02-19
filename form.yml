@@ -11,6 +11,7 @@ form:
   - bc_num_hours
   - bc_num_slots
   - bids_dir
+  - output_dir
   - skip_bids_validation
 
 # By default, everything defined in 'form' above is a text_field. Let's leave account alone
@@ -22,6 +23,18 @@ attributes:
     label: "bids_dir"
     required: true
     help: "The root folder of a BIDS valid dataset (sub-XXXXX folders should be found at the top level in this folder)."
+  output_dir:
+    type: string
+    default: ""
+    label: "output_dir"
+    required: true
+    help: "The output path for the outcomes of preprocessing and visual reports"
+  analysis_level:
+    type: "hidden_field"
+    default: "participant"
+    label: "analysis_level"
+    required: true
+    help: "Processing stage to be run, only “participant” in the case of fMRIPrep (see BIDS-Apps specification)."
   skip_bids_validation:
     widget: check_box
     checked_value: "--skip_bids_validation"
@@ -29,3 +42,9 @@ attributes:
     label: "skip_bids_validation"
     help: |
       Assume the input dataset is BIDS compliant and skip the validation
+  participant_label:
+    type: string
+    default: ""
+    label: "participant_label"
+    required: false
+    help: "A space delimited list of participant identifiers or a single identifier (the sub- prefix can be removed)"
